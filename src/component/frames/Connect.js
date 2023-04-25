@@ -33,7 +33,7 @@ import "../styles/connect.css";
 
 const NAME = "GmOrDie";
 const period = "MORNING | NIGHT | MIDONE | MIDTWO";
-const AMOUNT = new BN(10).mul(new BN(10).pow(new BN(10)));
+const AMOUNT = 0
 // const AMOUNT = new BN(10).mul(new BN(10).pow(new BN(10)));
 const GM_WEB_SUCKET = "wss://ws.gm.bldnodes.org/";
 const WS_SECOND_ENDPOINT = "wss://rpc.polkadot.io";

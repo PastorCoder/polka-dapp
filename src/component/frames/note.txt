@@ -1,0 +1,8 @@
+{selectedAccount ? (
+        <div className="select-account select-account-card">
+          {/**<button onClick={handleBurn}>Burn 10 $FREN</button> */}
+          <span className="balance-txt">
+            Current Balance: <span className="balance">{balance?.toNumber()} Dot</span> 
+          </span>
+        </div>
+      ) : null}

@@ -10,43 +10,38 @@ const Transfer = () => {
   const [recipientWallet, setRecipientWallet] = useState(0);
   // const [balance, setBalance] = useRecoilState(balanceState);
   const [balance, setBalance] = useState();
-   const [api, setApi] = useState();
-   const [accounts, setAccounts] = useState([]);
+  const [api, setApi] = useState();
+  const [accounts, setAccounts] = useState([]);
   const [selectedAccount, setSelectedAccount] = useState();
-    const [address, setAddress] = useRecoilState(addressState);
-  
+  const [address, setAddress] = useRecoilState(addressState);
 
   const handleTransfer = async () => {
-   
+    // Sign and send a transfer from Alice to Bob
+    const txHash = await api.tx.balances
+      .transfer(recipientWallet, amount)
+      .signAndSend(address);
 
-// Sign and send a transfer from Alice to Bob
-const txHash = await api.tx.balances
-  .transfer(recipientWallet, amount)
-  .signAndSend(address);
+    // Show the hash
+    console.log(`Submitted with hash ${txHash}`);
+  };
 
-// Show the hash
-console.log(`Submitted with hash ${txHash}`);
-  }
+  useEffect(() => {
+    if (!api) return;
+    if (!selectedAccount) return;
 
+    api.query.system.account(selectedAccount.address, ({ data: { free } }) => {
+      setBalance(free);
+    });
 
-
-   useEffect(() => {
-     if (!api) return;
-     if (!selectedAccount) return;
-
-     api.query.system.account(selectedAccount.address, ({ data: { free } }) => {
-       setBalance(free);
-     });
-
-     console.log(balance);
-   }, [api, selectedAccount, setBalance]);
+    console.log(balance);
+  }, [api, selectedAccount, setBalance]);
 
   return (
     <div>
       <Connect />
       <div className="talisman-card">
         <span>
-          <label for="amount">Amount </label>
+          <label htmlFor="amount">Amount </label>
           <input
             type="number"
             id="amount"
@@ -57,7 +52,7 @@ console.log(`Submitted with hash ${txHash}`);
           <br />
         </span>
         <span>
-          <label for="amount">Wallet </label>
+          <label htmlFor="amount">Wallet </label>
           <input
             type="text"
             id="wallet"
@@ -72,7 +67,10 @@ console.log(`Submitted with hash ${txHash}`);
           <span className="form-balance-num">{balance} Dot </span>
         </span>
 
-        <button className={`${amount === 0 ? "no-money" : "send-btn"}`}>
+        <button
+          onClick={handleTransfer}
+          className={`${amount === 0 ? "no-money" : "send-btn"}`}
+        >
           Send
         </button>
       </div>

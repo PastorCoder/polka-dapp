@@ -311,7 +311,7 @@ function Connect() {
           <hr />
           <span>
             Your current balance is :{" "}
-            <span className="balance">{balance?.toNumber()} Dot </span>
+            <span className="balance">{balance?.toString()} Dot </span>
           </span>
 
           {balance > 0 ? (

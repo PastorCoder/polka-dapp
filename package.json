@@ -1,6 +1,6 @@
 {
   "name": "polka-dapp",
-  "homepage": ".",
+  "homepage": "polka-dapp.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -9,7 +9,6 @@ const RoutePages = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Index />} />
-      <Route index element={<Index />} />
       <Route path="transfer-fund" element={<Transfer />} />
       <Route path="talisman" element={<TalismanPage />} />
     </Routes>

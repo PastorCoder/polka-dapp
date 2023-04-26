@@ -16,7 +16,8 @@ import { web3FromAddress } from "@polkadot/extension-dapp";
 import "../styles/chosenWallet.css";
 
 
-const AMOUNT = new BN(10).mul(new BN(10).pow(new BN(10)));
+const AMOUNT = 0;
+// const AMOUNT = new BN(10).mul(new BN(10).pow(new BN(10)));
 
 const BalanceCard = () => {
   const [selectedAccount, setSelectedAccount] =

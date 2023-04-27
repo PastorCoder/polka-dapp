@@ -33,9 +33,9 @@ import "../styles/connect.css";
 
 const NAME = "GmOrDie";
 const period = "MORNING | NIGHT | MIDONE | MIDTWO";
-const AMOUNT = 0
+const AMOUNT = 0;
 // const AMOUNT = new BN(10).mul(new BN(10).pow(new BN(10)));
-const GM_WEB_SUCKET = "wss://ws.gm.bldnodes.org/";
+const GM_WEB_SOCKET = "wss://ws.gm.bldnodes.org/";
 const WS_SECOND_ENDPOINT = "wss://rpc.polkadot.io";
 // const WS_SECOND_ENDPOINT = "wss://statemine-rpc-tn.dwellir.com";
 
@@ -53,8 +53,10 @@ function Connect() {
 
   const handleModal = () => setShowModal(!showModal);
 
+ {
+   /**
   const setup = async () => {
-    const wsProvider = new WsProvider(GM_WEB_SUCKET);
+    const wsProvider = new WsProvider(GM_WEB_SOCKET);
     const api = await ApiPromise.create({ provider: wsProvider });
     setApi(api);
     // console.log(api);
@@ -66,6 +68,8 @@ function Connect() {
     setNodeName(nodeName);
     console.log(`You are connected to chain ${chain} using ${nodeName} `);
   };
+ */
+ }
 
   const handleConnection = async () => {
     const extensions = await web3Enable(NAME);
@@ -87,8 +91,9 @@ function Connect() {
     setShowModal(showModal);
   };
 
-  async function handleShowName() {
-    const provider = new WsProvider(GM_WEB_SUCKET);
+  {
+    /** async function handleShowName() {
+    const provider = new WsProvider(GM_WEB_SOCKET);
     const oneApi = await ApiPromise.create({ provider });
     const [chain, nodeName, nodeVersion] = await Promise.all([
       oneApi.rpc.system.chain(),
@@ -99,6 +104,7 @@ function Connect() {
     console.log(
       `You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`
     );
+  } */
   }
 
   const handleTalisman = () => {
@@ -132,19 +138,17 @@ function Connect() {
   };
 
   const handleDisconnect = async () => {
-    const provider = new WsProvider(GM_WEB_SUCKET);
+    const provider = new WsProvider(GM_WEB_SOCKET);
     const api = await ApiPromise.create({ provider });
 
     const signer = provider.getSigner();
     await signer.disconnect();
   };
 
- 
-
   useEffect(() => {
     // console.log(AMOUNT.toString());
-    setup();
-    console.log("address is :", address)
+    // setup();
+    console.log("address is :", address);
   }, [address]);
 
   // address is : 5DaEWa1fgLCQtUzNpAKrCxdjwfzuVaXgjbJNpr2CKR4WCnb9
@@ -182,7 +186,7 @@ function Connect() {
   }, [api, selectedAccount, setBalance]);
 
   async function main() {
-    const provider = new WsProvider(GM_WEB_SUCKET);
+    const provider = new WsProvider(GM_WEB_SOCKET);
     const api = await ApiPromise.create({ provider });
 
     // Set the address to monitor balance changes
@@ -215,10 +219,7 @@ function Connect() {
             Connect Wallet
           </button>
         ) : (
-          <button
-            onClick={handleDisconnect}
-            className="disconnect-btn"
-          >
+          <button onClick={handleDisconnect} className="disconnect-btn">
             Disconnect Wallet
           </button>
         )}
